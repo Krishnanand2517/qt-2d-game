@@ -23,8 +23,14 @@ int main(int argc, char *argv[])
     rect->setFlag(QGraphicsItem::ItemIsFocusable);
     rect->setFocus();
 
-    // create a view and show it
+    // create a view
     QGraphicsView *view = new QGraphicsView(scene);
+
+    // disable scrollbars
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    // show the view finally
     view->show();
 
     return a.exec();
