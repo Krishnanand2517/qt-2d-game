@@ -1,7 +1,11 @@
 #include "Enemy.h"
+#include "Game.h"
 #include <QGraphicsScene>
 #include <QTimer>
 #include <stdlib.h>
+
+// there is an external global object called game
+extern Game *game;
 
 Enemy::Enemy()
 {
@@ -26,7 +30,10 @@ void Enemy::move()
     setPos(x(), y() + 5);
 
     // delete enemy after going off-screen
-    if ((pos().y() + rect().height() < 0) || (pos().y() > 700)) {
+    if (pos().y() > 600) {
+        // decrease health
+        game->health->decrease();
+
         scene()->removeItem(this);
         delete this;
     }
