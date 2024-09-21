@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QTimer>
 
 #include "MyRect.h"
 
@@ -30,6 +31,9 @@ int main(int argc, char *argv[])
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+    // set BG color to white
+    view->setBackgroundBrush(Qt::white);
+
     // show the view finally
     view->show();
 
@@ -41,6 +45,11 @@ int main(int argc, char *argv[])
 
     // move the player to bottom of the scene
     player->setPos(view->width() / 2, view->height() - player->rect().height() - 10);
+
+    // spawn enemies every 2 seconds
+    QTimer *timer = new QTimer();
+    QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
+    timer->start(2000);
 
     return a.exec();
 }

@@ -1,16 +1,21 @@
 #include "MyRect.h"
 #include <QKeyEvent>
+#include <QGraphicsScene>
 
 #include <Bullet.h>
-#include <QGraphicsScene>
+#include <Enemy.h>
 
 void MyRect::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Left) {
-        setPos(x() - 10, y());
+        if (pos().x() > 0) {
+            setPos(x() - 10, y());
+        }
     }
     else if (event->key() == Qt::Key_Right) {
-        setPos(x() + 10, y());
+        if (pos().x() + 100 < 800) {
+            setPos(x() + 10, y());
+        }
     }
     else if (event->key() == Qt::Key_Space) {
         // create a bullet
@@ -20,4 +25,10 @@ void MyRect::keyPressEvent(QKeyEvent *event)
         // add the bullet to the scene
         scene()->addItem(bullet);
     }
+}
+
+void MyRect::spawn() {
+    // create an enemy and put it into the scene
+    Enemy *enemy = new Enemy();
+    scene()->addItem(enemy);
 }
