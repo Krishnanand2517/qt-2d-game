@@ -2,6 +2,9 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include <QDebug>
+#include <QList>
+
+#include <Enemy.h>
 
 Bullet::Bullet()
 {
@@ -13,11 +16,30 @@ Bullet::Bullet()
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
     // start the timer
-    timer->start(50);
+    timer->start(16);
 }
 
 void Bullet::move()
 {
+    // list of colliding items
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+
+    // check if any enemy is in the list
+    for (int i = 0, n = colliding_items.size(); i < n; ++i) {
+        if (typeid(*(colliding_items[i])) == typeid(Enemy)) {
+            // remove enemy and bullet from scene
+            scene()->removeItem(colliding_items[i]);
+            scene()->removeItem(this);
+
+            // free memory
+            delete colliding_items[i];
+            delete this;
+
+            // don't execute further
+            return;
+        }
+    }
+
     // move bullet up
     setPos(x(), y() - 10);
 
