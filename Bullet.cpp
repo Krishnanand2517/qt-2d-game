@@ -1,5 +1,7 @@
 #include "Bullet.h"
+#include <QGraphicsScene>
 #include <QTimer>
+#include <QDebug>
 
 Bullet::Bullet()
 {
@@ -16,5 +18,13 @@ Bullet::Bullet()
 
 void Bullet::move()
 {
+    // move bullet up
     setPos(x(), y() - 10);
+
+    // delete bullet after going off-screen
+    if (pos().y() + rect().height() < 0) {
+        scene()->removeItem(this);
+        delete this;
+        qDebug() << "bullet deleted";
+    }
 }
