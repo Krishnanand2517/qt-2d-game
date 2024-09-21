@@ -25,8 +25,8 @@ void Enemy::move()
     // move enemy down
     setPos(x(), y() + 5);
 
-    // delete bullet after going off-screen
-    if (pos().y() + rect().height() < 0) {
+    // delete enemy after going off-screen
+    if ((pos().y() + rect().height() < 0) || (pos().y() > 700)) {
         scene()->removeItem(this);
         delete this;
     }
