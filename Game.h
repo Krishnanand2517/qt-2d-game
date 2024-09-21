@@ -6,6 +6,7 @@
 #include <QWidget>
 
 #include "Player.h"
+#include "Score.h"
 
 class Game: public QGraphicsView
 {
@@ -14,6 +15,7 @@ public:
 
     QGraphicsScene *scene;
     Player *player;
+    Score *score;
 };
 
 #endif // GAME_H

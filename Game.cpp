@@ -4,7 +4,7 @@
 
 Game::Game(QWidget *parent)
 {
-    // create a scene
+    // Create a scene
     scene = new QGraphicsScene();
 
     // adjust the scene to match the view
@@ -24,7 +24,7 @@ Game::Game(QWidget *parent)
     setBackgroundBrush(Qt::white);
 
 
-    // create the player
+    // Create the player
     player = new Player();
     player->setRect(0, 0, 100, 100);
 
@@ -39,7 +39,12 @@ Game::Game(QWidget *parent)
     scene->addItem(player);
 
 
-    // spawn enemies every 2 seconds
+    // Create the score
+    score = new Score();
+    scene->addItem(score);
+
+
+    // Spawn enemies every 2 seconds
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
     timer->start(2000);

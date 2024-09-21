@@ -1,10 +1,14 @@
 #include "Bullet.h"
+#include "Game.h"
 #include <QGraphicsScene>
 #include <QTimer>
 #include <QDebug>
 #include <QList>
 
-#include <Enemy.h>
+#include "Enemy.h"
+
+// there is an external global object called game
+extern Game *game;
 
 Bullet::Bullet()
 {
@@ -27,6 +31,9 @@ void Bullet::move()
     // check if any enemy is in the list
     for (int i = 0, n = colliding_items.size(); i < n; ++i) {
         if (typeid(*(colliding_items[i])) == typeid(Enemy)) {
+            // increase score
+            game->score->increase();
+
             // remove enemy and bullet from scene
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);

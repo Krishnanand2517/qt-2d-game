@@ -13,13 +13,15 @@ SOURCES += \
     Enemy.cpp \
     Game.cpp \
     Player.cpp \
+    Score.cpp \
     main.cpp
 
 HEADERS += \
     Bullet.h \
     Enemy.h \
     Game.h \
-    Player.h
+    Player.h \
+    Score.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
