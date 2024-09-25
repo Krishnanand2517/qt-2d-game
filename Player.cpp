@@ -7,7 +7,11 @@
 
 Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent)
 {
+    bulletSound = new QMediaPlayer();
+    bulletSoundOutput = new QAudioOutput();
 
+    bulletSound->setAudioOutput(bulletSoundOutput);
+    bulletSound->setSource(QUrl("qrc:/sounds/lasershot.wav"));
 }
 
 void Player::keyPressEvent(QKeyEvent *event)
@@ -29,6 +33,14 @@ void Player::keyPressEvent(QKeyEvent *event)
 
         // add the bullet to the scene
         scene()->addItem(bullet);
+
+        // play bullet sound
+        if (bulletSound->playbackState() == QMediaPlayer::PlayingState) {
+            bulletSound->setPosition(0);
+        }
+        else if (bulletSound->playbackState() == QMediaPlayer::StoppedState) {
+            bulletSound->play();
+        }
     }
 }
 

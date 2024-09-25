@@ -1,6 +1,8 @@
 #include "Game.h"
 
 #include <QTimer>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 Game::Game(QWidget *parent)
 {
@@ -52,6 +54,16 @@ Game::Game(QWidget *parent)
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
     timer->start(2000);
+
+    // play bg music
+    QMediaPlayer *music = new QMediaPlayer();
+    QAudioOutput *audioOutput = new QAudioOutput();
+    audioOutput->setVolume(60);
+    music->setAudioOutput(audioOutput);
+
+    music->setSource(QUrl("qrc:/sounds/bgsound.mp3"));
+    music->setLoops(QMediaPlayer::Infinite);
+    music->play();
 
     // show the view finally
     show();

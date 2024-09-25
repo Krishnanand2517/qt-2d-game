@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/sounds">
+        <file>bgsound.mp3</file>
+        <file>lasershot.wav</file>
+    </qresource>
+</RCC>

@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include <QGraphicsRectItem>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 class Player: public QObject, public QGraphicsRectItem
 {
@@ -13,6 +15,9 @@ public:
     void keyPressEvent(QKeyEvent *event);
 public slots:
     void spawn();
+private:
+    QMediaPlayer *bulletSound;
+    QAudioOutput *bulletSoundOutput;
 };
 
 #endif // PLAYER_H
