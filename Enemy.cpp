@@ -13,8 +13,10 @@ Enemy::Enemy()
     int random_number = rand() % 700;
     setPos(random_number, 0);
 
-    // draw the rect
-    setRect(0, 0, 100, 100);
+    // draw the graphics
+    setPixmap(QPixmap(":/images/enemy.png"));
+    setRotation(180);
+    setScale(0.5);
 
     // connect to timer
     QTimer *timer = new QTimer();

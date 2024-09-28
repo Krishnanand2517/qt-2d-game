@@ -3,6 +3,8 @@
 #include <QTimer>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <QBrush>
+#include <QImage>
 
 Game::Game(QWidget *parent)
 {
@@ -22,16 +24,16 @@ Game::Game(QWidget *parent)
     // set view size
     setFixedSize(800, 600);
 
-    // set BG color to white
-    setBackgroundBrush(Qt::white);
+    // set BG image
+    setBackgroundBrush(QBrush(QImage(":/images/bg.jpg")));
 
 
     // Create the player
     player = new Player();
-    player->setRect(0, 0, 100, 100);
+    // player->setRect(0, 0, 100, 100);
 
     // move the player to bottom of the scene
-    player->setPos(width() / 2, height() - player->rect().height() - 10);
+    player->setPos(400, 500);
 
     // make player focusable and focus on it (to receive input events)
     player->setFlag(QGraphicsItem::ItemIsFocusable);

@@ -12,8 +12,10 @@ extern Game *game;
 
 Bullet::Bullet()
 {
-    // draw the rect
-    setRect(0, 0, 10, 50);
+    // draw the graphics
+    setPixmap(QPixmap(":/images/bullet.png"));
+    setRotation(-90);
+    setScale(0.5);
 
     // connect to timer
     QTimer *timer = new QTimer();
@@ -51,7 +53,7 @@ void Bullet::move()
     setPos(x(), y() - 10);
 
     // delete bullet after going off-screen
-    if (pos().y() + rect().height() < 0) {
+    if (pos().y() + boundingRect().height() < 0) {
         scene()->removeItem(this);
         delete this;
     }

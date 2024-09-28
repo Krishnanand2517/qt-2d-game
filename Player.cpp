@@ -5,13 +5,17 @@
 #include "Bullet.h"
 #include "Enemy.h"
 
-Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent)
+Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
     bulletSound = new QMediaPlayer();
     bulletSoundOutput = new QAudioOutput();
 
     bulletSound->setAudioOutput(bulletSoundOutput);
     bulletSound->setSource(QUrl("qrc:/sounds/lasershot.wav"));
+
+    // set graphic
+    setPixmap(QPixmap(":/images/player.png"));
+    setScale(0.25);
 }
 
 void Player::keyPressEvent(QKeyEvent *event)
